@@ -55,14 +55,14 @@ public enum De
         return sRet;
     }
 
-    public void Lancer()
+    public void lancer() 
     {
-        for (int i = 1; i <= 8; i++) 
+        for (De de : De.values()) 
         {
-            if (("DE" + i).verrouille = false)
+            if (!de.verrouille) 
             {
-                ("DE" + i).face = ("DE" + i).setFace();
-                System.out.println(("DE" + i).face);
+                de.face = de.setFace();
+                System.out.println(de.name() + ": " + de.face);
             }
         }
     }
