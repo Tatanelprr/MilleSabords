@@ -1,10 +1,12 @@
 public class Joueur 
 {
-    private String nom;
+    private String nom  ;
+    private int    score;
 
     public Joueur(String nom)
     {
-        this.nom = nom;
+        this.nom   = nom;
+        this.score = 0  ;
     }
 
     public String getNom()

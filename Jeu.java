@@ -24,11 +24,13 @@ public class Jeu
         this.nbJoueur = this.scanner.nextInt();
 
         List<Joueur> joueurs = new ArrayList<>();
+        this.scanner.nextLine();
 
         for (int i = 1; i <= this.nbJoueur; i++) 
         {
+            String nom;
             System.out.println("Quel est le nom du joueur " + i);
-            String nom = this.scanner.nextLine();
+            nom  = this.scanner.nextLine();
             Joueur joueur = new Joueur(nom);
             joueurs.add(joueur);
         }
@@ -36,11 +38,9 @@ public class Jeu
 
     public void Jouer()
     {
-        for (int i = 0; i < 40; i++) 
+        while (!this.dernierTour) 
         {
-            Carte c;
-            c = this.pioche.tirerCarte();
-            System.out.println(c.getSymbole());
-        }  
+            
+        }
     }
 }
