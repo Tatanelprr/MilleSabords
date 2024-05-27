@@ -4,18 +4,14 @@ import java.util.Scanner;
 
 public class Jeu 
 {
-    private Pioche  pioche  = new Pioche()          ;
-    private Scanner scanner = new Scanner(System.in);
+    private Pioche       pioche  = new Pioche()          ;
+    private Scanner      scanner = new Scanner(System.in);
+    private List<Joueur> joueurs = new ArrayList<>()     ;
 
     private boolean dernierTour;
     private int     nbJoueur   ;
 
-    public static void main(String[] args) 
-    {
-        Jeu jeu = new Jeu();
-    }
-
-    private Jeu()
+    public Jeu()
     {
         this.dernierTour = false;
         
@@ -23,17 +19,17 @@ public class Jeu
 
         this.nbJoueur = this.scanner.nextInt();
 
-        List<Joueur> joueurs = new ArrayList<>();
         this.scanner.nextLine();
 
         for (int i = 1; i <= this.nbJoueur; i++) 
         {
-            String nom;
             System.out.println("Quel est le nom du joueur " + i);
-            nom  = this.scanner.nextLine();
+            String nom  = this.scanner.nextLine();
+
             Joueur joueur = new Joueur(nom);
-            joueurs.add(joueur);
+            this.joueurs.add(joueur);
         }
+
     }
 
     public void Jouer()
@@ -42,5 +38,10 @@ public class Jeu
         {
             
         }
+    }
+
+    public List<Joueur> getJoueurs()
+    {
+        return this.joueurs;
     }
 }
