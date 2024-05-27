@@ -4,14 +4,14 @@ import java.util.List;
 public class Controleur 
 {
     private Jeu          jeu     = new Jeu()        ;
-    private List<Joueur> joueurs = new ArrayList<>();
+    private List<Joueur> tabScore = new ArrayList<>();
 
     public Controleur()
     {
-        this.joueurs = jeu.getJoueurs();
+        this.tabScore = jeu.getJoueurs();
         
         System.out.println("Les joueurs sont : ");
-        for (Joueur joueur : this.joueurs) 
+        for (Joueur joueur : this.tabScore) 
         {
             System.out.println(joueur.getNom());
         }

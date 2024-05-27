@@ -13,4 +13,9 @@ public class Joueur
     {
         return this.nom;
     }
+
+    public int getScore()
+    {
+        return this.score;
+    }
 }
