@@ -40,8 +40,23 @@ public class Jeu
         }
     }
 
+    public Pioche getPioche()
+    {
+        return this.pioche;
+    }
+
     public List<Joueur> getJoueurs()
     {
         return this.joueurs;
+    }
+
+    public boolean getDernierTour()
+    {
+        return this.dernierTour;
+    }
+
+    public int getNbJoueur()
+    {
+        return this.nbJoueur;
     }
 }
