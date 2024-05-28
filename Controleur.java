@@ -88,6 +88,14 @@ public class Controleur
         panel1.add(tablePanel);
 
         //Création du panel n°2
+        if ( !this.jeu.getPioche().isEmpty())
+        {
+            ImageIcon piocheIcon = new ImageIcon("images/dos.jpg");
+    
+            JLabel piocheLabel = new JLabel(piocheIcon);
+
+            panel2.add(piocheLabel);
+        }
  
         mainPanel.add(panel1);
         mainPanel.add(panel2);
