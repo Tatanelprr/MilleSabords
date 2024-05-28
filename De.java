@@ -18,41 +18,39 @@ public enum De
 		this.verrouille = false;
 	}
 
-	public String setFace()
+	private void setFace()
 	{
 		int lancer = (int) (Math.random() * 6) + 1;
-		String sRet;
 
 		switch (lancer) {
 			case 1:
-				sRet = "DéDiamant.jpg";
+				this.face = "DéDiamant.jpg";
 				break;
 		
 			case 2:
-				sRet = "DéEpées.jpg";
+				this.face = "DéEpées.jpg";
 				break;
 
 			case 3:
-				sRet = "DéMort.jpg";
+				this.face = "DéMort.jpg";
 				break;
 
 			case 4:
-				sRet = "DéOr.jpg";
+				this.face = "DéOr.jpg";
 				break;
 
 			case 5:
-				sRet = "DéPerroquet.jpg";
+				this.face = "DéPerroquet.jpg";
 				break;
 
 			case 6:
-				sRet = "DéSinge.jpg";
+				this.face = "DéSinge.jpg";
 				break;
 
 			default:
-				sRet = null;
+				this.face = null;
 				break;
 		}
-		return sRet;
 	}
 
 	public void lancer() 
@@ -61,10 +59,13 @@ public enum De
 		{
 			if (!de.verrouille) 
 			{
-				de.face = de.setFace();
-				System.out.println(de.name() + ": " + de.face);
+				de.setFace();
 			}
 		}
 	}
 
+	public String getFace()
+	{
+		return this.face;
+	}
 }

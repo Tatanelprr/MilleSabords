@@ -4,9 +4,10 @@ import java.util.Scanner;
 
 public class Jeu 
 {
-	private Pioche	   pioche  = new Pioche()		  ;
-	private Scanner	  scanner = new Scanner(System.in);
+	private Pioche	     pioche  = new Pioche()		  ;
+	private Scanner	     scanner = new Scanner(System.in);
 	private List<Joueur> joueurs = new ArrayList<>()  ;
+	private Carte        carte;
 
 	private boolean dernierTour;
 	private int	 nbJoueur   ;
@@ -28,8 +29,9 @@ public class Jeu
 
 			Joueur joueur = new Joueur(nom);
 			this.joueurs.add(joueur);
-		}
 
+		}
+		this.carte = this.pioche.tirerCarte();
 	}
 
 	public void Jouer()
@@ -58,5 +60,10 @@ public class Jeu
 	public int getNbJoueur()
 	{
 		return this.nbJoueur;
+	}
+
+	public Carte getCarte()
+	{
+		return this.carte;
 	}
 }

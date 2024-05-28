@@ -27,8 +27,6 @@ public class Controleur
 			this.tabScore.add(joueurInfo);
 		}  
 
-		System.out.println();
-
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(screenSize.width, screenSize.height);
 
@@ -46,8 +44,8 @@ public class Controleur
         mainPanel.setLayout(new GridLayout(2, 2));
 
         panel1 = new JPanel(new GridLayout(2, 2));
-        panel2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        panel3 = new JPanel(new GridLayout(5, 9));
+        panel2 = new JPanel(new BorderLayout());
+        panel3 = new JPanel(new GridLayout(2, 4));
         panel4 = new JPanel(new GridLayout(1, 2));
 
 		panel1.setOpaque(false);
@@ -88,19 +86,46 @@ public class Controleur
         panel1.add(tablePanel);
 
         //Création du panel n°2
-        if (!this.jeu.getPioche().isEmpty()) {
+
+        ImageIcon carteIcon = new ImageIcon("images/" + this.jeu.getCarte().getSymbole());
+        Image resizedCarte = carteIcon.getImage().getScaledInstance(204, 310, Image.SCALE_SMOOTH);
+        ImageIcon resizedCartIcon = new ImageIcon(resizedCarte);
+        JLabel carteLabel = new JLabel(resizedCartIcon);
+        carteLabel.setPreferredSize(new Dimension(204, 310));
+
+        panel2.add(carteLabel, BorderLayout.CENTER);
+
+        if (!this.jeu.getPioche().isEmpty()) 
+        {
             ImageIcon piocheIcon = new ImageIcon("images/dos.jpg");
-            // Redimensionner l'image à la taille spécifiée
-            Image resizedImage = piocheIcon.getImage().getScaledInstance(102, 155, Image.SCALE_SMOOTH);
+            Image resizedImage = piocheIcon.getImage().getScaledInstance(204, 310, Image.SCALE_SMOOTH);
             ImageIcon resizedIcon = new ImageIcon(resizedImage);
             JLabel piocheLabel = new JLabel(resizedIcon);
-            // Définir la taille préférée du JLabel
-            piocheLabel.setPreferredSize(new Dimension(102, 155));
-            panel2.add(piocheLabel);
-        } else {
+            piocheLabel.setPreferredSize(new Dimension(204, 310));
+
+            panel2.add(piocheLabel, BorderLayout.EAST);
+        } 
+        else 
+        {
             JLabel emptyLabel = new JLabel("Pioche vide");
             panel2.add(emptyLabel);
         }
+
+        //Création du panel n°3
+        for (De de : De.values()) 
+        {
+            de.lancer();
+            ImageIcon deIcon = new ImageIcon("images/" + de.getFace());
+            Image resizedDe = deIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            ImageIcon resizedDeIcon = new ImageIcon(resizedDe);
+            JLabel deLabel = new JLabel(resizedDeIcon);
+            deLabel.setPreferredSize(new Dimension(100, 100));
+
+            panel3.add(deLabel);
+        }
+
+        //Création du panel n°4
+        
  
         mainPanel.add(panel1);
         mainPanel.add(panel2);
@@ -111,6 +136,11 @@ public class Controleur
         frame.setVisible(true);
 	}
 
+    private ImageIcon redimensionnerImage(ImageIcon icon, int width, int height) 
+    {
+        Image image = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new ImageIcon(image);
+    }
 
 
 	public static void main(String[] args) 
