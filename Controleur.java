@@ -46,7 +46,7 @@ public class Controleur
         mainPanel.setLayout(new GridLayout(2, 2));
 
         panel1 = new JPanel(new GridLayout(2, 2));
-        panel2 = new JPanel(new GridLayout(1, 3));
+        panel2 = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         panel3 = new JPanel(new GridLayout(5, 9));
         panel4 = new JPanel(new GridLayout(1, 2));
 
@@ -88,13 +88,18 @@ public class Controleur
         panel1.add(tablePanel);
 
         //Création du panel n°2
-        if ( !this.jeu.getPioche().isEmpty())
-        {
+        if (!this.jeu.getPioche().isEmpty()) {
             ImageIcon piocheIcon = new ImageIcon("images/dos.jpg");
-    
-            JLabel piocheLabel = new JLabel(piocheIcon);
-
+            // Redimensionner l'image à la taille spécifiée
+            Image resizedImage = piocheIcon.getImage().getScaledInstance(102, 155, Image.SCALE_SMOOTH);
+            ImageIcon resizedIcon = new ImageIcon(resizedImage);
+            JLabel piocheLabel = new JLabel(resizedIcon);
+            // Définir la taille préférée du JLabel
+            piocheLabel.setPreferredSize(new Dimension(102, 155));
             panel2.add(piocheLabel);
+        } else {
+            JLabel emptyLabel = new JLabel("Pioche vide");
+            panel2.add(emptyLabel);
         }
  
         mainPanel.add(panel1);
