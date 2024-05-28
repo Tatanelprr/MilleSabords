@@ -67,4 +67,9 @@ public class Pioche
 	{
 		return this.pioche.size();
 	}
+
+	public boolean isEmpty() 
+	{
+		return this.pioche.isEmpty();
+	}
 }
