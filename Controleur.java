@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.border.EmptyBorder;
 import java.util.List;
 import javax.swing.*;
 import java.awt.*;
@@ -49,9 +49,10 @@ public class Controleur
                 g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
             }
         };
+
         mainPanel.setLayout(new GridLayout(2, 2));
 
-        panel1 = new JPanel(new GridLayout(2, 2));
+        panel1 = new JPanel(new GridLayout(2, 1));
         panel2 = new JPanel(new GridLayout(1, 3));
         panel3 = new JPanel(new GridLayout(5, 9));
         panel4 = new JPanel(new GridLayout(1, 2));
@@ -60,6 +61,42 @@ public class Controleur
         panel2.setOpaque(false);
         panel3.setOpaque(false);
         panel4.setOpaque(false);
+
+
+        //Création du panel n°1
+        String[] columnNames = {"Nom", "Score"};
+        Object[][] data = new Object[tabScore.size()][2];
+        for (int i = 0; i < tabScore.size(); i++) 
+        {
+            data[i][0] = tabScore.get(i).get(0);
+            data[i][1] = tabScore.get(i).get(1);
+        }
+        
+        JTable table = new JTable(data, columnNames) 
+        {
+            public boolean isCellEditable(int row, int column) 
+            {                
+                return false;               
+            };
+        };
+
+        table.setOpaque(false);
+        table.setFillsViewportHeight(true);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setOpaque(false);
+        scrollPane.getViewport().setOpaque(false);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+
+        JPanel tablePanel = new JPanel(new BorderLayout());
+        tablePanel.setOpaque(false);
+        tablePanel.add(scrollPane, BorderLayout.CENTER);
+        tablePanel.setBorder(BorderFactory.createEmptyBorder());
+
+        panel1.add(tablePanel);
+
+        //Création du panel 2
+        
 
         mainPanel.add(panel1);
         mainPanel.add(panel2);
