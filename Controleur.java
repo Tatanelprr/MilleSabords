@@ -55,13 +55,47 @@ public class Controleur
 		panel3.setOpaque(false);
 		panel4.setOpaque(false);
 
+        //Création du panel n°1
+        String[] columnNames = {"Nom", "Score"};
+        Object[][] data = new Object[tabScore.size()][2];
+        for (int i = 0; i < tabScore.size(); i++) 
+        {
+            data[i][0] = tabScore.get(i).get(0);
+            data[i][1] = tabScore.get(i).get(1);
+        }
+        
+        JTable table = new JTable(data, columnNames) 
+        {
+            public boolean isCellEditable(int row, int column) 
+            {                
+                return false;               
+            };
+        };
+
+        table.setOpaque(false);
+        table.setFillsViewportHeight(true);
+        
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setOpaque(false);
+        scrollPane.getViewport().setOpaque(false);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+ 
+        JPanel tablePanel = new JPanel(new BorderLayout());
+        tablePanel.setOpaque(false);
+        tablePanel.add(scrollPane, BorderLayout.CENTER);
+        tablePanel.setBorder(BorderFactory.createEmptyBorder());
+ 
+        panel1.add(tablePanel);
+
+        //Création du panel n°2
+ 
         mainPanel.add(panel1);
         mainPanel.add(panel2);
         mainPanel.add(panel3);
         mainPanel.add(panel4);
-
-		frame.add(mainPanel);
-		frame.setVisible(true);
+ 
+        frame.add(mainPanel);
+        frame.setVisible(true);
 	}
 
 
