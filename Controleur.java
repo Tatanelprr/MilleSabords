@@ -10,6 +10,7 @@ public class Controleur {
     private Jeu jeu = new Jeu();
     private List<List<Object>> tabScore = new ArrayList<>();
     private List<JLabel> deLabels = new ArrayList<>();
+    private JLabel carteLabel; 
 
     private static final int FRAME_WIDTH = 800;
     private static final int FRAME_HEIGHT = 600;
@@ -101,7 +102,7 @@ public class Controleur {
         scoreLabel.setPreferredSize(new Dimension(IMAGE_WIDTH, IMAGE_HEIGHT));
         panel2.add(scoreLabel, BorderLayout.EAST);
 
-        JLabel carteLabel = new JLabel(resizeImageIcon(new ImageIcon("images/" + this.jeu.getCarte().getSymbole()), IMAGE_WIDTH, IMAGE_HEIGHT));
+        carteLabel = new JLabel(resizeImageIcon(new ImageIcon("images/" + this.jeu.getCarte().getSymbole()), IMAGE_WIDTH, IMAGE_HEIGHT));
         carteLabel.setPreferredSize(new Dimension(IMAGE_WIDTH, IMAGE_HEIGHT));
         panel2.add(carteLabel, BorderLayout.WEST);
 
