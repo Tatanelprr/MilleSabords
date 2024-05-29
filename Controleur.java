@@ -147,7 +147,7 @@ public class Controleur {
         finDuTour.setPreferredSize(BUTTON_SIZE);
         finDuTour.addActionListener(e -> {
             jeu.setCarte(jeu.getPioche().tirerCarte());
-            updateDeFaces();
+            updateCarteLabel();
         });
 
         JPanel panelBoutons = new JPanel(new FlowLayout());
@@ -170,6 +170,11 @@ public class Controleur {
             De de = des.get(i);
             deLabels.get(i).setIcon(resizeImageIcon(new ImageIcon("images/" + de.getFace()), DE_IMAGE_SIZE, DE_IMAGE_SIZE));
         }
+    }
+
+    private void updateCarteLabel() {
+        ImageIcon newCarteIcon = new ImageIcon("images/" + this.jeu.getCarte().getSymbole());
+        carteLabel.setIcon(resizeImageIcon(newCarteIcon, IMAGE_WIDTH, IMAGE_HEIGHT));
     }
 
     public static void main(String[] args) 
