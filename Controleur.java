@@ -87,13 +87,21 @@ public class Controleur
 
         //Création du panel n°2
 
+		ImageIcon scoreIcon = new ImageIcon("images/Score.jpg");
+        Image resizedScore = scoreIcon.getImage().getScaledInstance(204, 310, Image.SCALE_SMOOTH);
+        ImageIcon resizedScorIcon = new ImageIcon(resizedScore);
+        JLabel scoreLabel = new JLabel(resizedScorIcon);
+        scoreLabel.setPreferredSize(new Dimension(204, 310));
+
+        panel2.add(scoreLabel, BorderLayout.EAST);
+
         ImageIcon carteIcon = new ImageIcon("images/" + this.jeu.getCarte().getSymbole());
         Image resizedCarte = carteIcon.getImage().getScaledInstance(204, 310, Image.SCALE_SMOOTH);
         ImageIcon resizedCartIcon = new ImageIcon(resizedCarte);
         JLabel carteLabel = new JLabel(resizedCartIcon);
         carteLabel.setPreferredSize(new Dimension(204, 310));
 
-        panel2.add(carteLabel, BorderLayout.CENTER);
+        panel2.add(carteLabel, BorderLayout.WEST);
 
         if (!this.jeu.getPioche().isEmpty()) 
         {
@@ -103,7 +111,7 @@ public class Controleur
             JLabel piocheLabel = new JLabel(resizedIcon);
             piocheLabel.setPreferredSize(new Dimension(204, 310));
 
-            panel2.add(piocheLabel, BorderLayout.EAST);
+            panel2.add(piocheLabel, BorderLayout.CENTER);
         } 
         else 
         {
