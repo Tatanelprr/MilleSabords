@@ -3,11 +3,15 @@ import javax.swing.table.DefaultTableCellRenderer;
 import java.util.List;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Controleur 
 {
-	private Jeu		  jeu	 = new Jeu()		;
+	private Jeu jeu = new Jeu();
+
 	private List<List<Object>> tabScore = new ArrayList<>();
+    private List<JLabel>       deLabels = new ArrayList<>();
 
 	public Controleur()
 	{
@@ -120,28 +124,41 @@ public class Controleur
         }
 
         //Création du panel n°3
+        
         for (De de : De.values()) 
         {
-            de.lancer();
             ImageIcon deIcon = new ImageIcon("images/" + de.getFace());
             Image resizedDe = deIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
             ImageIcon resizedDeIcon = new ImageIcon(resizedDe);
             JLabel deLabel = new JLabel(resizedDeIcon);
             deLabel.setPreferredSize(new Dimension(100, 100));
 
+            deLabels.add(deLabel);
             panel3.add(deLabel);
         }
 
         //Création du panel n°4
-        JButton lancerButton = new JButton();
-        JButton finDuTour    = new JButton();
+        JButton lancerButton = new JButton("Lancer");
+        JButton finDuTour    = new JButton("Fin du tour");
 
         lancerButton.setPreferredSize(new Dimension(150, 50));
+        lancerButton.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e) 
+            {
+                jeu.lancer();
+                updateDeFaces();
+            }
+        });
+        
+        
         finDuTour.setPreferredSize(new Dimension(150, 50));
 
         JPanel panelBoutons = new JPanel(new FlowLayout());
         panelBoutons.add(lancerButton);
         panelBoutons.add(finDuTour);
+
+        panelBoutons.setOpaque(false);
 
         panel4.add(panelBoutons, BorderLayout.SOUTH);
  
@@ -158,6 +175,19 @@ public class Controleur
     {
         Image image = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
         return new ImageIcon(image);
+    }
+
+    private void updateDeFaces()
+    {
+        List<De> des = jeu.getDes();
+        for (int i = 0; i < des.size(); i++) 
+        {
+            De de = des.get(i);
+            ImageIcon deIcon = new ImageIcon("images/" + de.getFace());
+            Image resizedDe = deIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            ImageIcon resizedDeIcon = new ImageIcon(resizedDe);
+            deLabels.get(i).setIcon(resizedDeIcon);
+        }
     }
 
 

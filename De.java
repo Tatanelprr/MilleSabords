@@ -18,7 +18,7 @@ public enum De
 		this.verrouille = false;
 	}
 
-	private void setFace()
+	public void setFace()
 	{
 		int lancer = (int) (Math.random() * 6) + 1;
 
@@ -53,19 +53,13 @@ public enum De
 		}
 	}
 
-	public void lancer() 
-	{
-		for (De de : De.values()) 
-		{
-			if (!de.verrouille) 
-			{
-				de.setFace();
-			}
-		}
-	}
-
 	public String getFace()
 	{
 		return this.face;
+	}
+
+	public boolean getVerrouille()
+	{
+		return this.verrouille;
 	}
 }

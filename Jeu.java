@@ -34,14 +34,16 @@ public class Jeu
 		this.carte = this.pioche.tirerCarte();
 	}
 
-	public void Jouer()
+	public void lancer() 
 	{
-		while (!this.dernierTour) 
+		for (De de : De.values()) 
 		{
-			
+			if (!de.getVerrouille()) 
+			{
+				de.setFace();
+			}
 		}
 	}
-
 	public Pioche getPioche()
 	{
 		return this.pioche;
@@ -66,4 +68,14 @@ public class Jeu
 	{
 		return this.carte;
 	}
+
+	public List<De> getDes()
+	{
+        List<De> des = new ArrayList<>();
+        for (De de : De.values()) 
+		{
+            des.add(de);
+        }
+        return des;
+    }
 }
