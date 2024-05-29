@@ -78,4 +78,9 @@ public class Jeu
         }
         return des;
     }
+
+	public void setCarte(Carte c)
+	{
+		this.carte = c;
+	}
 }
