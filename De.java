@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.ArrayList;
+
 public enum De 
 {
 	DE1 ( null ),
@@ -58,8 +61,28 @@ public enum De
 		return this.face;
 	}
 
+	public String getFaceVerrouille()
+	{
+		return this.face;
+	}
+
 	public boolean getVerrouille()
 	{
 		return this.verrouille;
 	}
+
+	public void setVerrouille(boolean verrouille) 
+	{
+        this.verrouille = verrouille;
+    }
+
+	public static List<De> getDes() 
+	{
+        List<De> des = new ArrayList<>();
+        for (De de : De.values()) 
+		{
+            des.add(de);
+        }
+        return des;
+    }
 }

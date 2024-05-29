@@ -10,15 +10,20 @@ public class Jeu
 	private Carte        carte;
 
 	private boolean dernierTour;
-	private int	 nbJoueur   ;
+	private int	 nbJoueur = 0  ;
 
 	public Jeu()
 	{
 		this.dernierTour = false;
 		
-		System.out.println("Quel est le nombre de joueur ?");
+		while (nbJoueur < 2 || nbJoueur > 5)
+		{
+			System.out.println("Le nombre de joueurs doit être entre 2 et 5");
+			System.out.println("Quel est le nombre de joueur ?");
 
-		this.nbJoueur = this.scanner.nextInt();
+			this.nbJoueur = this.scanner.nextInt();
+		}
+		
 
 		this.scanner.nextLine();
 
@@ -36,7 +41,8 @@ public class Jeu
 
 	public void lancer() 
 	{
-		for (De de : De.values()) 
+		List<De> des = getDes();
+		for (De de : des)
 		{
 			if (!de.getVerrouille()) 
 			{

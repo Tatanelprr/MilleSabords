@@ -19,7 +19,8 @@ public class Controleur {
     private static final int DE_IMAGE_SIZE = 100;
     private static final Dimension BUTTON_SIZE = new Dimension(150, 50);
 
-    public Controleur() {
+    public Controleur() 
+    {
         JFrame frame = new JFrame("Mille Sabords");
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -37,9 +38,10 @@ public class Controleur {
     }
 
     private JPanel createMainPanel(JPanel panel1, JPanel panel2, JPanel panel3, JPanel panel4) {
-        JPanel mainPanel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
+        JPanel mainPanel = new JPanel() 
+        {
+            protected void paintComponent(Graphics g) 
+            {
                 super.paintComponent(g);
                 ImageIcon imageIcon = new ImageIcon("images/fond.jpg");
                 g.drawImage(imageIcon.getImage(), 0, 0, getWidth(), getHeight(), this);
@@ -53,11 +55,13 @@ public class Controleur {
         return mainPanel;
     }
 
-    private JPanel createPanel1() {
+    private JPanel createPanel1() 
+    {
         JPanel panel1 = new JPanel(new GridLayout(2, 2));
         panel1.setOpaque(false);
 
-        for (Joueur joueur : jeu.getJoueurs()) {
+        for (Joueur joueur : jeu.getJoueurs()) 
+        {
             List<Object> joueurInfo = new ArrayList<>();
             joueurInfo.add(joueur.getNom());
             joueurInfo.add(joueur.getScore());
@@ -66,14 +70,16 @@ public class Controleur {
 
         String[] columnNames = {"Nom", "Score"};
         Object[][] data = new Object[tabScore.size()][2];
-        for (int i = 0; i < tabScore.size(); i++) {
+        for (int i = 0; i < tabScore.size(); i++) 
+        {
             data[i][0] = tabScore.get(i).get(0);
             data[i][1] = tabScore.get(i).get(1);
         }
 
-        JTable table = new JTable(data, columnNames) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
+        JTable table = new JTable(data, columnNames) 
+        {
+            public boolean isCellEditable(int row, int column) 
+            {
                 return false;
             }
         };
@@ -94,7 +100,8 @@ public class Controleur {
         return panel1;
     }
 
-    private JPanel createPanel2() {
+    private JPanel createPanel2() 
+    {
         JPanel panel2 = new JPanel(new BorderLayout());
         panel2.setOpaque(false);
 
@@ -106,33 +113,55 @@ public class Controleur {
         carteLabel.setPreferredSize(new Dimension(IMAGE_WIDTH, IMAGE_HEIGHT));
         panel2.add(carteLabel, BorderLayout.WEST);
 
-        if (!this.jeu.getPioche().isEmpty()) {
+        if (!this.jeu.getPioche().isEmpty()) 
+        {
             JLabel piocheLabel = new JLabel(resizeImageIcon(new ImageIcon("images/dos.jpg"), IMAGE_WIDTH, IMAGE_HEIGHT));
             piocheLabel.setPreferredSize(new Dimension(IMAGE_WIDTH, IMAGE_HEIGHT));
             panel2.add(piocheLabel, BorderLayout.CENTER);
-        } else {
+        } 
+        else 
+        {
             JLabel emptyLabel = new JLabel("Pioche vide");
-            panel2.add(emptyLabel);
+            panel2.add(emptyLabel,BorderLayout.CENTER);
         }
 
         return panel2;
     }
 
-    private JPanel createPanel3() {
+    private JPanel createPanel3() 
+    {
         JPanel panel3 = new JPanel(new GridLayout(2, 4));
         panel3.setOpaque(false);
 
-        for (De de : De.values()) {
+        for (De de : De.values()) 
+        {
             JLabel deLabel = new JLabel(resizeImageIcon(new ImageIcon("images/" + de.getFace()), DE_IMAGE_SIZE, DE_IMAGE_SIZE));
             deLabel.setPreferredSize(new Dimension(DE_IMAGE_SIZE, DE_IMAGE_SIZE));
             deLabels.add(deLabel);
+    
+            deLabel.addMouseListener(new java.awt.event.MouseAdapter() 
+            {
+                public void mouseClicked(java.awt.event.MouseEvent evt) 
+                {
+                    for (De d : De.values()) 
+                    {
+                        if (d.getFace().equals(de.getFace())) 
+                        {
+                            d.setVerrouille(!d.getVerrouille());
+                            updateDeLabelAppearance(deLabel, d);
+                            break;
+                        }
+                    }
+                }
+            });
             panel3.add(deLabel);
         }
 
         return panel3;
     }
 
-    private JPanel createPanel4() {
+    private JPanel createPanel4() 
+    {
         JPanel panel4 = new JPanel(new BorderLayout());
         panel4.setOpaque(false);
 
@@ -140,13 +169,15 @@ public class Controleur {
         JButton finDuTour = new JButton("Fin du tour");
 
         lancerButton.setPreferredSize(BUTTON_SIZE);
-        lancerButton.addActionListener(e -> {
+        lancerButton.addActionListener(e -> 
+        {
             jeu.lancer();
             updateDeFaces();
         });
 
         finDuTour.setPreferredSize(BUTTON_SIZE);
-        finDuTour.addActionListener(e -> {
+        finDuTour.addActionListener(e -> 
+        {
             jeu.setCarte(jeu.getPioche().tirerCarte());
             updateCarteLabel();
         });
@@ -160,22 +191,40 @@ public class Controleur {
         return panel4;
     }
 
-    private ImageIcon resizeImageIcon(ImageIcon icon, int width, int height) {
+    private ImageIcon resizeImageIcon(ImageIcon icon, int width, int height) 
+    {
         Image image = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
         return new ImageIcon(image);
     }
 
-    private void updateDeFaces() {
+    private void updateDeFaces() 
+    {
         List<De> des = jeu.getDes();
-        for (int i = 0; i < des.size(); i++) {
+        for (int i = 0; i < des.size(); i++) 
+        {
             De de = des.get(i);
             deLabels.get(i).setIcon(resizeImageIcon(new ImageIcon("images/" + de.getFace()), DE_IMAGE_SIZE, DE_IMAGE_SIZE));
         }
     }
 
-    private void updateCarteLabel() {
+    private void updateCarteLabel() 
+    {
         ImageIcon newCarteIcon = new ImageIcon("images/" + this.jeu.getCarte().getSymbole());
         carteLabel.setIcon(resizeImageIcon(newCarteIcon, IMAGE_WIDTH, IMAGE_HEIGHT));
+    }
+
+    private void updateDeLabelAppearance(JLabel deLabel, De de) 
+    {
+        if (de.getVerrouille()) 
+        {
+            deLabel.setEnabled(false);
+            deLabel.setIcon(resizeImageIcon(new ImageIcon("images/" + de.getFaceVerrouille()), DE_IMAGE_SIZE, DE_IMAGE_SIZE));
+        } 
+        else 
+        {
+            deLabel.setEnabled(true);
+            deLabel.setIcon(resizeImageIcon(new ImageIcon("images/" + de.getFace()), DE_IMAGE_SIZE, DE_IMAGE_SIZE));
+        }
     }
 
     public static void main(String[] args) 
