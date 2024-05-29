@@ -46,7 +46,7 @@ public class Controleur
         panel1 = new JPanel(new GridLayout(2, 2));
         panel2 = new JPanel(new BorderLayout());
         panel3 = new JPanel(new GridLayout(2, 4));
-        panel4 = new JPanel(new GridLayout(1, 2));
+        panel4 = new JPanel(new BorderLayout());
 
 		panel1.setOpaque(false);
 		panel2.setOpaque(false);
@@ -133,7 +133,17 @@ public class Controleur
         }
 
         //Création du panel n°4
-        
+        JButton lancerButton = new JButton();
+        JButton finDuTour    = new JButton();
+
+        lancerButton.setPreferredSize(new Dimension(150, 50));
+        finDuTour.setPreferredSize(new Dimension(150, 50));
+
+        JPanel panelBoutons = new JPanel(new FlowLayout());
+        panelBoutons.add(lancerButton);
+        panelBoutons.add(finDuTour);
+
+        panel4.add(panelBoutons, BorderLayout.SOUTH);
  
         mainPanel.add(panel1);
         mainPanel.add(panel2);
