@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 public class Jeu 
 {
-	private Pioche	     pioche  = new Pioche()		  ;
-	private Scanner	     scanner = new Scanner(System.in);
+	private Pioche		 pioche  = new Pioche()		  ;
+	private Scanner		 scanner = new Scanner(System.in);
 	private List<Joueur> joueurs = new ArrayList<>()  ;
 	
-	private Carte   carte       ;
+	private Carte   carte		;
 	private Joueur  joueuractif ;
 	private boolean dernierTour ;
-	private int	    nbJoueur = 0;
+	private int		nbJoueur = 0;
 
 	public Jeu()
 	{
@@ -37,6 +37,7 @@ public class Jeu
 			this.joueurs.add(joueur);
 
 		}
+		this.joueuractif = this.joueurs.get(0);
 		this.carte = this.pioche.tirerCarte();
 	}
 
@@ -66,6 +67,11 @@ public class Jeu
 		return this.dernierTour;
 	}
 
+	public Joueur getJoueurActif()
+	{
+		return this.joueuractif;
+	}
+
 	public int getNbJoueur()
 	{
 		return this.nbJoueur;
@@ -78,16 +84,45 @@ public class Jeu
 
 	public List<De> getDes()
 	{
-        List<De> des = new ArrayList<>();
-        for (De de : De.values()) 
+		List<De> des = new ArrayList<>();
+		for (De de : De.values()) 
 		{
-            des.add(de);
-        }
-        return des;
-    }
+			des.add(de);
+		}
+		return des;
+	}
 
 	public void setCarte(Carte c)
 	{
 		this.carte = c;
 	}
+
+	public void finDuTour() 
+	{
+		this.setCarte(this.getPioche().tirerCarte());
+
+		for (De de : De.values()) 
+		{
+			de.setVerrouille(false);
+		}
+
+
+		for (int i = 0; i < this.nbJoueur; i++) 
+		{
+			if (this.joueurs.get(i) == this.joueuractif) 
+			{
+				i++;
+				if (i == this.nbJoueur) 
+				{ 
+					this.joueuractif = this.joueurs.get(0);
+				} 
+				else 
+				{
+					this.joueuractif = this.joueurs.get(i);
+				}
+				break;
+			}
+		}
+	}
+	
 }

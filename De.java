@@ -14,7 +14,7 @@ public enum De
 
 	private String  face;
 	private boolean verrouille;
-	private int     id;
+	private int	 id;
 
 	private De(String face, int id)
 	{
@@ -75,8 +75,8 @@ public enum De
 
 	public void setVerrouille(boolean verrouille) 
 	{
-        this.verrouille = verrouille;
-    }
+		this.verrouille = verrouille;
+	}
 
 	public int getId()
 	{
@@ -85,11 +85,11 @@ public enum De
 
 	public static List<De> getDes() 
 	{
-        List<De> des = new ArrayList<>();
-        for (De de : De.values()) 
+		List<De> des = new ArrayList<>();
+		for (De de : De.values()) 
 		{
-            des.add(de);
-        }
-        return des;
-    }
+			des.add(de);
+		}
+		return des;
+	}
 }
