@@ -3,22 +3,24 @@ import java.util.ArrayList;
 
 public enum De 
 {
-	DE1 ( null ),
-	DE2 ( null ),
-	DE3 ( null ),
-	DE4 ( null ),
-	DE5 ( null ),
-	DE6 ( null ),
-	DE7 ( null ),
-	DE8 ( null );
+	DE1 ( null, 1 ),
+	DE2 ( null, 2 ),
+	DE3 ( null, 3 ),
+	DE4 ( null, 4 ),
+	DE5 ( null, 5 ),
+	DE6 ( null, 6 ),
+	DE7 ( null, 7 ),
+	DE8 ( null, 8 );
 
 	private String  face;
 	private boolean verrouille;
+	private int     id;
 
-	private De(String face)
+	private De(String face, int id)
 	{
 		this.face = face;
 		this.verrouille = false;
+		this.id = id;
 	}
 
 	public void setFace()
@@ -75,6 +77,11 @@ public enum De
 	{
         this.verrouille = verrouille;
     }
+
+	public int getId()
+	{
+		return this.id;
+	}
 
 	public static List<De> getDes() 
 	{

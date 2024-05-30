@@ -132,31 +132,30 @@ public class Controleur {
     {
         JPanel panel3 = new JPanel(new GridLayout(2, 4));
         panel3.setOpaque(false);
-
-        for (De de : De.values()) 
+    
+        List<De> des = De.getDes();
+    
+        for (int i = 0; i < des.size(); i++) 
         {
+            De de = des.get(i);
             JLabel deLabel = new JLabel(resizeImageIcon(new ImageIcon("images/" + de.getFace()), DE_IMAGE_SIZE, DE_IMAGE_SIZE));
             deLabel.setPreferredSize(new Dimension(DE_IMAGE_SIZE, DE_IMAGE_SIZE));
             deLabels.add(deLabel);
     
+            int index = i;
             deLabel.addMouseListener(new java.awt.event.MouseAdapter() 
             {
                 public void mouseClicked(java.awt.event.MouseEvent evt) 
                 {
-                    for (De d : De.values()) 
-                    {
-                        if (d.getFace().equals(de.getFace())) 
-                        {
-                            d.setVerrouille(!d.getVerrouille());
-                            updateDeLabelAppearance(deLabel, d);
-                            break;
-                        }
-                    }
+                    De clickedDe = des.get(index);
+                    clickedDe.setVerrouille(!clickedDe.getVerrouille());
+                    updateDeLabelAppearance(deLabel, clickedDe);
                 }
             });
+    
             panel3.add(deLabel);
         }
-
+    
         return panel3;
     }
 

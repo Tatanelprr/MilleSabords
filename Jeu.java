@@ -7,10 +7,11 @@ public class Jeu
 	private Pioche	     pioche  = new Pioche()		  ;
 	private Scanner	     scanner = new Scanner(System.in);
 	private List<Joueur> joueurs = new ArrayList<>()  ;
-	private Carte        carte;
-
-	private boolean dernierTour;
-	private int	 nbJoueur = 0  ;
+	
+	private Carte   carte       ;
+	private Joueur  joueuractif ;
+	private boolean dernierTour ;
+	private int	    nbJoueur = 0;
 
 	public Jeu()
 	{
